@@ -70,3 +70,9 @@ li#logout{
 input{
     text-align: center;
 }
+
+table#table_id{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}

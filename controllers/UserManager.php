@@ -63,8 +63,8 @@ class UserManager{
             // ERROR! If the passwords are both empty, the registration proceeds
             if($password == $passwordConfirm){
                 $_SESSION['username'] = $username;
-                $c->query("INSERT INTO users VALUES ('$username','$password','$email','$name','$surname','$gender', $birth_date)");
-                //header("Location:index.php?a=main");
+                $c->query("INSERT INTO users (username, password, email, name, surname, gender, birth_date) VALUES ('$username','$password','$email','$name','$surname','$gender', $birth_date)");
+                header("Location:index.php?a=main");
             }    
             else{
                 $this->error("The passwords you entered aren't a match.", "reg");
@@ -81,7 +81,6 @@ class UserManager{
         
         $row = $r->fetch_assoc();
         $user = new User($row);
-        
         $fullName = $user->fullName();
         echo '<div class="col-md-6">';
         echo '<h4>Welcome, '.$fullName[0].' '.$fullName[1].'!</h4>';   
@@ -90,7 +89,7 @@ class UserManager{
         $r = $c->query("SELECT * FROM users");
         while($row = $r->fetch_assoc()){
             $user = new User($row);
-            echo '<p><a href="?a=kudos&user='.$user->getUsername().'">@'.$user->getUsername().'</a></p>';
+            echo '<p><a href="?a=kudos&user='.$user->getId().'">@'.$user->getUsername().'</a></p>';
         }
 
         echo '</div>';

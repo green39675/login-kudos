@@ -18,12 +18,20 @@ class Kudos{
         $this->count = $row['count'];
     }
 
-    function setCount(){
-        $c = DB::connect();
-        $c->query("UPDATE kudos SET count = $this->count+1 WHERE id=$this->id");
-    }
     function getId() { return $this->id; }
-    function getFromUser() { return $this->fromUser; }
-    function getToUser() { return $this->toUser; }
+    function getFromUser() {
+        $c=DB::connect();
+        $r = $c->query("SELECT username FROM users WHERE id='$this->fromUser'");
+        echo $c->error;
+        $row = $r->fetch_assoc();
+        return $row['username'];
+     }
+    function getToUser() { 
+        $c=DB::connect();
+        $r = $c->query("SELECT username FROM users WHERE id='$this->toUser'");
+        $row = $r->fetch_assoc();
+        return $row['username'];
+   
+    }
 }
 ?>

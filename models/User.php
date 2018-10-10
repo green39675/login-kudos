@@ -1,5 +1,6 @@
 <?php
 class User{
+    private $id;
     private $username;
     private $password;
     private $email;
@@ -9,6 +10,7 @@ class User{
     public $birth_date;
 
     function __construct($row){
+        $this->id = $row['id'];
         $this->username = $row['username'];
         $this->password = $row['password'];
         $this->email = $row['email'];
@@ -23,6 +25,7 @@ class User{
     }
 
     function getUsername() { return $this->username; }
+    function getId() { return $this->id; }
 
 
 }
